@@ -4,7 +4,7 @@
  */
 
 require_once('libs/fred/fred_api.php');
-$api_key = '[api_key_here]';
+$api_key = '5a6efc3b9ea2112ee2bb6abef689342f';
 
 if (!empty($_GET['search'])) {
 	$api = fred_api::factory('series', $api_key);

@@ -8,8 +8,20 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<script src="https://connectors.tableau.com/libs/tableauwdc-2.0.0-beta.js" type="text/javascript"></script>
+	<script type="text/javascript" src="/resources/tableau-output.js"></script>
 	<script type="text/javascript" src="resources/fred.js"></script>
 	<link rel="stylesheet" href="resources/fred.css" />
+	
+	<script type="text/javascript">
+		// Google Analytics tracking code
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-6095304-1', 'auto');
+		  ga('send', 'pageview');
+	</script>
 </head>
 
 <body>
@@ -21,7 +33,7 @@
 				<span>U.S. ECONOMIC DATA</span>
 			</div>
 		</a>
-		<a class="navbar-brand" href="http://www.interworks.com">
+		<a class="navbar-brand" href="https://www.interworks.com">
 			<img src="https://www.interworks.com/logo/images/logo.png" />
 		</a>
 		<div class="navbar-border">
@@ -31,8 +43,9 @@
 	<div class="container">
 		<div class="alert alert-danger warning-msg">
 			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-			<b>Whoa!</b> We've detected you are loading this in a browser window.<br/>Please load this window from Tableau to use the
-			<a href="http://onlinehelp.tableau.com/current/pro/online/windows/en-us/help.htm#examples_web_data_connector.html" target="_blank">Web Data Connector</a>.
+			<b>Whoa!</b> We've detected you are loading this in a browser window.<br/><br/>
+			You can still download the data to a flat file, but for best performance, load this window from Tableau and use the
+			<a href="https://onlinehelp.tableau.com/current/pro/online/windows/en-us/help.htm#examples_web_data_connector.html" target="_blank">Web Data Connector</a>.
 		</div>
 
 		<div class="container">

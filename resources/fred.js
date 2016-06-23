@@ -116,13 +116,9 @@ $(function() {
 	$('.back-black').hide();
 	
 	$('#get-wdc').click(function () {
-		if (typeof tableauVersionBootstrap  == 'undefined' || !tableauVersionBootstrap) {
-			return;
-		} else {
-			tableau.connectionName = 'FRED Data';
-			tableau.connectionData = $('#wdc-ids').val();
-			tableau.submit();
-		}
+		tableau.connectionName = 'FRED Data';
+		tableau.connectionData = $('#wdc-ids').val();
+		tableau.submit();
 	});
 
 	$('#clear-wdc').click(function() {

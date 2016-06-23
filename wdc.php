@@ -4,18 +4,10 @@
  */
 
 require_once('libs/fred/fred_api.php');
-$api_key = '[api_key_here]';
+$api_key = '5a6efc3b9ea2112ee2bb6abef689342f';
 
 if (empty($_GET['wdc_ids'])) {
 	die('Error: No Fred Id Specified.');
-}
-
-function cleanField($str)
-{
-	$str = preg_replace("/[^a-zA-Z0-9]/", "_", $str);
-	$str = strtolower($str);
-	
-	return $str;
 }
 
 $return = array();
@@ -30,55 +22,36 @@ foreach (json_decode($_GET['wdc_ids'], true) as $vals) {
 		'realtime_start' => '1900-01-01',
 	)));
 	
-	$fields[] = $friendlyname;
-	
 	foreach ($results->observations as $el) {
-		$key = str_replace('-', '_', $el->date);
-		if (array_key_exists($key, $return)) {
-			$return[$key][$friendlyname] = floatval($el->value);
-		} else {
-			//add series call to get title
-			$return[$key] = array(
-				'date'        => $el->date,
-				$friendlyname => floatval($el->value),
-			);
-		}
+		$return[] = array(
+			'Date'        => $el->date,
+			'MetricName'  => $friendlyname,
+			'MetricValue' => floatval($el->value),
+		);
 	}
 }
 
 $data = array();
-$cols = array(array('id' => 'Date', 'alias' => 'Date', 'dataType' => 'date'));
-
-// Fill in missing results.
-foreach ($return as $date => $el) {
-	foreach ($fields as $id) {
-		if (empty($return[$date][$id])) {
-			$return[$date][$id] = null;
-		}
-	}
-}
-
-// Register Fields
-foreach ($fields as $el) {
-	$cols[] = array(
-		'id'       => cleanField($el),
-		'alias'    => $el,
-		'dataType' => 'float',
-	);
-}
-
-// Populate rows
-foreach ($return as $el) {
-	$add = array('Date' => $el['date']);
-	foreach ($fields as $f) {
-		$id = cleanField($f);
-		$add[$id] = @floatval($el[$f]);
-	}
-	$data[] = $add;
-}
+$cols = array(
+	array(
+		'id'       => 'Date',
+		'alias'    => 'Date',
+		'dataType' => 'date'
+	),
+	array(
+		'id'       => 'MetricName',
+		'alias'    => 'Metric Name',
+		'dataType' => 'string'
+	),
+	array(
+		'id'       => 'MetricValue',
+		'alias'    => 'Metric Value',
+		'dataType' => 'float'
+	),
+);
 
 header('Content-Type: application/json');
 echo json_encode(array(
-	'dataToReturn' => $data,
+	'dataToReturn' => $return,
 	'cols'         => $cols,
 ));
